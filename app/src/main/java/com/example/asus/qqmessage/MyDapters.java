@@ -6,8 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -73,8 +75,28 @@ public class MyDapters extends BaseAdapter {
                 case LEFTTYPE:
                     convertView=LayoutInflater.from(mContext).inflate(R.layout.leftlayout,null);
                     viewHolderLeft.imageView= (ImageView) convertView.findViewById(R.id.image);
+                    viewHolderLeft.imageView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext,"点击图片",Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                    viewHolderLeft.mButton=(Button)convertView.findViewById(R.id.but);
+                    viewHolderLeft.mButton.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext,"点击了按钮",Toast.LENGTH_SHORT).show();
+
+                        }
+                    });
                     viewHolderLeft.leftView=(TextView)convertView.findViewById(R.id.left_text);
                     convertView.setTag(viewHolderLeft);
+                    viewHolderLeft.leftView.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            Toast.makeText(mContext,"点击了文本",Toast.LENGTH_SHORT).show();
+                        }
+                    });
                     break;
                 case RIGHTTYPE:
                     convertView=LayoutInflater.from(mContext).inflate(R.layout.rightlayout,null);
@@ -119,12 +141,15 @@ public class MyDapters extends BaseAdapter {
         return convertView;
     }
 
+
+
     class ViewHolderTime{
         private TextView time;
     }
     class ViewHolderLeft{
         private ImageView imageView;
         private TextView leftView;
+        private Button mButton;
     }
     class ViewHolderRight{
         private ImageView imageView;
